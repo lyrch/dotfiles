@@ -103,6 +103,9 @@ Plugin 'VundleVim/Vundle.vim'
   set showmatch                    " Show the matching bracket
 
 " UI Config
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Copied the 'colors' directory into ~/.vim/colors
 Plugin 'flazz/vim-colorschemes'
@@ -115,5 +118,3 @@ let g:rehash256 = 1
 " Wrap up
 call vundle#end()
 filetype plugin indent on
-
-
