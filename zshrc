@@ -49,14 +49,15 @@ ZSH_THEME="bira"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git rvm)
 
 # User configuration
 
-export PATH="/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451@global/bin:/Users/jaredwilkerson/.rvm/rubies/ruby-2.0.0-p451/bin:/usr/local/bin:./bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Users/jaredwilkerson/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451@global/bin:/Users/jaredwilkerson/.rvm/rubies/ruby-2.0.0-p451/bin:./bin:/Users/jaredwilkerson/.rvm/bin:/Users/jaredwilkerson/.rvm/bin"
+#export PATH="/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451@global/bin:/Users/jaredwilkerson/.rvm/rubies/ruby-2.0.0-p451/bin:/usr/local/bin:./bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Users/jaredwilkerson/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451/bin:/Users/jaredwilkerson/.rvm/gems/ruby-2.0.0-p451@global/bin:/Users/jaredwilkerson/.rvm/rubies/ruby-2.0.0-p451/bin:./bin:/Users/jaredwilkerson/.rvm/bin:/Users/jaredwilkerson/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.rvm/scripts/rvm
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -82,3 +83,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -18,24 +18,17 @@ if has('syntax')
   syntax enable
 endif
 
-" Vundle Setup
-
-" If Vundle is not installed, install it.
-if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
-    !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-endif
 
 set nocompatible
 syntax on
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
+Plug 'junegunn/vim-plug'
 
 " General editor tools
 
   " NERDTree
-  Plugin 'scrooloose/nerdtree'
+  Plug 'scrooloose/nerdtree'
   nnoremap <silent> <leader>nt :call NERDTreeFindOrClose()<CR>
   function! NERDTreeFindOrClose()
     if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
@@ -48,16 +41,14 @@ Plugin 'VundleVim/Vundle.vim'
       endif
     endif
   endfunction
-  let NERDTreeQuitOnOpen=1
-  let NERDTreeIgnore=['\.o$', '\.so$', '\.bmp$', '\.class$', '^core.*',
-        \ '\.vim$', '\~$', '\.pyc$', '\.pyo$', '\.jpg$', '\.gif$',
-        \ '\.png$', '\.ico$', '\.exe$', '\.cod$', '\.obj$', '\.mac$',
-        \ '\.1st', '\.dll$', '\.pyd$', '\.zip$', '\.modules$',
-        \ '\.git', '\.hg', '\.svn', '\.bzr' ]
+
+  " vim-arpeggio
+  Plug 'kana/vim-arpeggio'
+
 
   " Syntax checking
   if exists('*getmatches')
-    Plugin 'scrooloose/syntastic'
+    Plug 'scrooloose/syntastic'
     let g:syntastic_error_symbol          = '✗✗'
     let g:syntastic_warning_symbol        = '⚠⚠'
     let g:syntastic_style_error_symbol    = '✗'
@@ -74,19 +65,21 @@ Plugin 'VundleVim/Vundle.vim'
     let g:syntastic_xslt_checkers         = ['xmllint']
     " npm install js-yaml
     let g:syntastic_yaml_checkers         = ['jsyaml']
-    Plugin 'dbakker/vim-lint'
+    Plug 'dbakker/vim-lint'
   endif
 
   " ds/cs/ys for deleting, changing, your surrounding chars (like ', ", etc.)
-  Plugin 'tpope/vim-surround'
+  Plug 'tpope/vim-surround'
 
 " Language specific tools
 
   " Ruby
-  Plugin 'tpope/vim-ruby'
+  let g:plug_url_format = 'git@github.com:%s.git'
+  Plug 'vim-ruby/vim-ruby'
+  unlet g:plug_url_format
 
-  "Rust
-  Plugin 'rust-lang/rust.vim'
+  " Rust
+  Plug 'rust-lang/rust.vim'
 
 " General Config
   
@@ -103,18 +96,18 @@ Plugin 'VundleVim/Vundle.vim'
   set showmatch                    " Show the matching bracket
 
 " UI Config
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+  Plug 'flazz/vim-colorschemes'
+  set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-" Copied the 'colors' directory into ~/.vim/colors
-Plugin 'flazz/vim-colorschemes'
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
-" Plugin 'sjl/badwolf'   "Backup colorscheme
-
+  Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Wrap up
-call vundle#end()
-filetype plugin indent on
+  call plug#end()
+
+  if !exists('g:loaded_arpeggio')
+    call arpeggio#load()
+  endif
+  
+  Arpeggio inoremap jk  <Esc>
+" Need to set colorscheme after plug#end()
+  colorscheme molokai
