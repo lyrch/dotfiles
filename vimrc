@@ -7,9 +7,9 @@
 "   3 Change surrounding plugin
 " 4 Language specific tools
 "   1 Ruby plugins
-" 5 General config
-" 4 UI config
-" 5 Wrapup
+" 5 UI config
+" 6 Wrapup
+" 7 General config
 
 " Setup
 
@@ -26,60 +26,72 @@ call plug#begin()
 Plug 'junegunn/vim-plug'
 
 " General editor tools
-
-  " NERDTree
-  Plug 'scrooloose/nerdtree'
-  nnoremap <silent> <leader>nt :call NERDTreeFindOrClose()<CR>
-  function! NERDTreeFindOrClose()
-    if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
-      NERDTreeClose
+"" NERDTree
+Plug 'scrooloose/nerdtree'
+nnoremap <silent> <leader>nt :call NERDTreeFindOrClose()<CR>
+function! NERDTreeFindOrClose()
+  if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+    NERDTreeClose
+  else
+    if bufname('%') == ''
+      NERDTree
     else
-      if bufname('%') == ''
-        NERDTree
-      else
-        NERDTreeFind
-      endif
+      NERDTreeFind
     endif
-  endfunction
-
-  " vim-arpeggio
-  Plug 'kana/vim-arpeggio'
-
-
-  " Syntax checking
-  if exists('*getmatches')
-    Plug 'scrooloose/syntastic'
-    let g:syntastic_error_symbol          = '✗✗'
-    let g:syntastic_warning_symbol        = '⚠⚠'
-    let g:syntastic_style_error_symbol    = '✗'
-    let g:syntastic_style_warning_symbol  = '⚠'
-    let g:syntastic_auto_loc_list         = 1 " Close the location-list when errors are gone
-    let g:syntastic_loc_list_height       = 5
-    let g:syntastic_sh_checkers           = ['shellcheck', 'checkbashisms', 'sh']
-    let g:syntastic_sh_checkbashisms_args = '-x'
-    let g:syntastic_ruby_checkers         = ['mri', 'jruby', 'rubocop']
-    let g:syntastic_ruby_rubocop_args     = '--display-cop-names'
-    let g:syntastic_scss_checkers         = ['sass']
-    let g:syntastic_sass_checkers         = ['sass']
-    let g:syntastic_xml_checkers          = ['xmllint']
-    let g:syntastic_xslt_checkers         = ['xmllint']
-    " npm install js-yaml
-    let g:syntastic_yaml_checkers         = ['jsyaml']
-    Plug 'dbakker/vim-lint'
   endif
+endfunction
 
-  " ds/cs/ys for deleting, changing, your surrounding chars (like ', ", etc.)
-  Plug 'tpope/vim-surround'
+"" vim-arpeggio
+Plug 'kana/vim-arpeggio'
+
+"" Syntax checking
+if exists('*getmatches')
+  Plug 'scrooloose/syntastic'
+  let g:syntastic_error_symbol          = '✗✗'
+  let g:syntastic_warning_symbol        = '⚠⚠'
+  let g:syntastic_style_error_symbol    = '✗'
+  let g:syntastic_style_warning_symbol  = '⚠'
+  let g:syntastic_auto_loc_list         = 1 " Close the location-list when errors are gone
+  let g:syntastic_loc_list_height       = 5
+  let g:syntastic_sh_checkers           = ['shellcheck', 'checkbashisms', 'sh']
+  let g:syntastic_sh_checkbashisms_args = '-x'
+  let g:syntastic_ruby_checkers         = ['mri', 'jruby', 'rubocop']
+  let g:syntastic_ruby_rubocop_args     = '--display-cop-names'
+  let g:syntastic_scss_checkers         = ['sass']
+  let g:syntastic_sass_checkers         = ['sass']
+  let g:syntastic_xml_checkers          = ['xmllint']
+  let g:syntastic_xslt_checkers         = ['xmllint']
+  """ npm install js-yaml
+  let g:syntastic_yaml_checkers         = ['jsyaml']
+  Plug 'dbakker/vim-lint'
+endif
+
+"" ds/cs/ys for deleting, changing, your surrounding chars (like ', ", etc.)
+Plug 'tpope/vim-surround'
+
+"" editorconfig plugin to share project style configs
+Plug 'editorconfig/editorconfig-vim'
 
 " Language specific tools
+"" Ruby
+Plug 'vim-ruby/vim-ruby'
 
-  " Ruby
-  let g:plug_url_format = 'git@github.com:%s.git'
-  Plug 'vim-ruby/vim-ruby'
-  unlet g:plug_url_format
+"" Rust
+Plug 'rust-lang/rust.vim'
 
-  " Rust
-  Plug 'rust-lang/rust.vim'
+" UI Config
+  Plug 'flazz/vim-colorschemes'
+
+  Plug 'powerline/powerline'
+
+" Wrap up Plug
+  call plug#end()
+
+  if !exists('g:loaded_arpeggio')
+    call arpeggio#load()
+  endif
+
+  Arpeggio inoremap jk  <Esc>
 
 " General Config
   
@@ -94,20 +106,8 @@ Plug 'junegunn/vim-plug'
   set ignorecase                   " ignore case in searches
   set cursorline                   " highlights the current line
   set showmatch                    " Show the matching bracket
+  set textwidth=80                 " Keep the lines a resonable length
+  match ErrorMsg '\%>80v.\+'       " Highlight lines that extend beyond 80 characters
 
-" UI Config
-  Plug 'flazz/vim-colorschemes'
-  set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
-
-  Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-" Wrap up
-  call plug#end()
-
-  if !exists('g:loaded_arpeggio')
-    call arpeggio#load()
-  endif
-  
-  Arpeggio inoremap jk  <Esc>
 " Need to set colorscheme after plug#end()
   colorscheme molokai
