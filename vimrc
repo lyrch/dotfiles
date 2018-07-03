@@ -7,6 +7,8 @@
 "   3 Change surrounding plugin
 " 4 Language specific tools
 "   1 Ruby plugins
+"   2 Rust
+"   3 Markdown
 " 5 UI config
 " 6 Wrapup
 " 7 General config
@@ -79,10 +81,13 @@ Plug 'vim-ruby/vim-ruby'
 "" Rust
 Plug 'rust-lang/rust.vim'
 
-" UI Config
-  Plug 'flazz/vim-colorschemes'
+"" Markdown
+Plug 'JamshedVesuna/vim-markdown-preview'
 
-  Plug 'powerline/powerline'
+" UI Config
+Plug 'flazz/vim-colorschemes'
+
+Plug 'powerline/powerline'
 
 " Wrap up Plug
   call plug#end()
