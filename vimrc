@@ -15,20 +15,17 @@
 
 " Setup
 
-" Turn on syntax highlighting if it exists
-if has('syntax')
-  syntax enable
-endif
 
 
 set nocompatible
-syntax on
+" Turn on syntax highlighting if it exists
 filetype off
 call plug#begin()
 Plug 'junegunn/vim-plug'
 
 " General editor tools
-"" NERDTree
+
+" NERDTree
 Plug 'scrooloose/nerdtree'
 nnoremap <silent> <leader>nt :call NERDTreeFindOrClose()<CR>
 function! NERDTreeFindOrClose()
@@ -43,10 +40,11 @@ function! NERDTreeFindOrClose()
   endif
 endfunction
 
-"" vim-arpeggio
+" vim-arpeggio
 Plug 'kana/vim-arpeggio'
 
-"" Syntax checking
+
+" Syntax checking
 if exists('*getmatches')
   Plug 'scrooloose/syntastic'
   let g:syntastic_error_symbol          = '✗✗'
@@ -89,14 +87,8 @@ Plug 'flazz/vim-colorschemes'
 
 Plug 'powerline/powerline'
 
-" Wrap up Plug
-  call plug#end()
-
-  if !exists('g:loaded_arpeggio')
-    call arpeggio#load()
-  endif
-
-  Arpeggio inoremap jk  <Esc>
+" coffee-script
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 " General Config
   
@@ -114,5 +106,27 @@ Plug 'powerline/powerline'
   set textwidth=80                 " Keep the lines a resonable length
   match ErrorMsg '\%>80v.\+'       " Highlight lines that extend beyond 80 characters
 
+" UI Config
+Plug 'flazz/vim-colorschemes'
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+
+Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" Wrap up
+call plug#end()
+
+
+if has('syntax')
+  syntax enable
+endif
+
+filetype plugin indent on
+
+if !exists('g:loaded_arpeggio')
+  call arpeggio#load()
+endif
+
+Arpeggio inoremap jk  <Esc>
+
 " Need to set colorscheme after plug#end()
-  colorscheme molokai
+colorscheme molokai
