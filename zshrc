@@ -7,6 +7,8 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
+elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]] ; then
+  source /etc/bash_completion.d/virtualenvwrapper
 else
   echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
@@ -21,6 +23,7 @@ setopt incappendhistory
 setopt sharehistory
 
 #zplug "caiogondim/bullet-train.zsh"
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/colorize", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
