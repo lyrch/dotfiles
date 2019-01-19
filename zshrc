@@ -5,13 +5,13 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python/libexec/bin
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-  source /usr/local/bin/virtualenvwrapper.sh
-elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]] ; then
-  source /etc/bash_completion.d/virtualenvwrapper
-else
-  echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
+# if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+#   source /usr/local/bin/virtualenvwrapper.sh
+# elif [[ -f /etc/bash_completion.d/virtualenvwrapper ]] ; then
+#   source /etc/bash_completion.d/virtualenvwrapper
+# else
+#   echo "WARNING: Can't find virtualenvwrapper.sh"
+# fi
 source ~/.zplug/init.zsh
 
 ## History file configuration
@@ -36,10 +36,22 @@ zplug "plugins/zsh-syntax-highlighting", from:oh-my-zsh
 # antigen bundle lein
 
 zplug load
+
+# Load rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# Have npm modules install locally rather than globally
 export PATH=~/.npm-global/bin:$PATH
+
+# Load pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
