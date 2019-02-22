@@ -56,5 +56,22 @@ fi
 # Enable pipenv command completion
 eval "$(pipenv --completion)"
 
+# Automatically enable python virtualenv
+# https://github.com/pypa/pipenv/wiki/Run-pipenv-shell-automatically
+# PROMPT_COMMAND='prompt'
+# precmd() { eval "$PROMPT_COMMAND" }
+# function prompt()
+# {
+#   if [ ! $PIPENV_ACTIVE ]; then
+#     if [ `pipenv --venv 2>/dev/null` ]; then
+#       export PIPENV_INITPWD="$PWD"
+#       pipenv shell
+#     fi
+#   elif [ $PIPENV_INITPWD ] ; then
+#     cd "$PIPENV_INITPWD"
+#     unset PIPENV_INITPWD
+#   fi
+# }
+
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
