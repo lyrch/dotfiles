@@ -15,11 +15,29 @@
 
 " Setup
 
+let g:my_vim_dir = expand('~/.vim')
+let g:my_vimrc = expand('~/.vimrc')
 
 
 set nocompatible
 " Turn on syntax highlighting if it exists
 filetype off
+
+" General Config
+
+set number
+scriptencoding utf-8
+set tabstop=2                    " set the default tabstops
+set shiftwidth=2                 " set the default autoindent
+set softtabstop=2
+set expandtab
+set backspace=indent,eol,start   " Set for maximum backspace smartness
+set nowrap                       " Soft (without changing text) wrapping.
+set ignorecase                   " ignore case in searches
+set cursorline                   " highlights the current line
+set showmatch                    " Show the matching bracket
+set textwidth=80                 " Keep the lines a resonable length
+match ErrorMsg '\%>80v.\+'       " Highlight lines that extend beyond 80 characters
 
 function! LoadPlugins()
   Plug 'junegunn/vim-plug'
@@ -90,22 +108,6 @@ function! LoadPlugins()
 
   " coffee-script
   Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-
-  " General Config
-
-    set number
-    scriptencoding utf-8
-    set tabstop=2                    " set the default tabstops
-    set shiftwidth=2                 " set the default autoindent
-    set softtabstop=2
-    set expandtab
-    set backspace=indent,eol,start   " Set for maximum backspace smartness
-    set nowrap                       " Soft (without changing text) wrapping.
-    set ignorecase                   " ignore case in searches
-    set cursorline                   " highlights the current line
-    set showmatch                    " Show the matching bracket
-    set textwidth=80                 " Keep the lines a resonable length
-    match ErrorMsg '\%>80v.\+'       " Highlight lines that extend beyond 80 characters
 
   " UI Config
   Plug 'flazz/vim-colorschemes'
