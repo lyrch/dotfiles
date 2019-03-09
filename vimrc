@@ -139,8 +139,7 @@ if executable('git') && executable('curl') && has('autocmd')
 
   if g:my_bootstrap
     :PlugUpdate
-    quit " Close the plugin
-    install window.
+    quit " Close the plugin install window.
     redraw
   endif
   unlet g:my_bootstrap
